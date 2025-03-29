@@ -13,11 +13,15 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className='bg-white shadow-md'>
+    <nav className='flex items-center bg-white shadow-md h-30'>
       <div className='container mx-auto px-4'>
         <div className='flex justify-between items-center h-16'>
-          <Link to='/' className='text-2xl font-bold text-primary'>
-            Makeup Artist
+          <Link to='/' className='flex justify-between items-center h-16'>
+            <img
+              className='flex justify-between items-center h-25'
+              src='/images/LOGO.png'
+              alt='Logo'
+            />
           </Link>
 
           {/* Desktop Navigation */}

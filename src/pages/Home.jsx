@@ -10,7 +10,7 @@ const Home = () => {
         <div className='absolute inset-0 bg-black/50 z-10'></div>
         <div className='absolute inset-0'>
           <img
-            src='/hero-bg.jpg'
+            src='/images/HERO.png'
             alt='Bridal Makeup'
             className='w-full h-full object-cover'
           />
@@ -35,7 +35,7 @@ const Home = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
             <div>
               <img
-                src='/about.jpg'
+                src='/images/certificate .jpg'
                 alt='Makeup Artist'
                 className='rounded-lg shadow-lg'
               />
@@ -70,7 +70,7 @@ const Home = () => {
                 className='group relative overflow-hidden rounded-lg'
               >
                 <img
-                  src={`/featured-${item}.jpg`}
+                  src={`/featured-${1}.jpg`}
                   alt={`Featured Work ${item}`}
                   className='w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110'
                 />
