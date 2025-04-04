@@ -78,15 +78,15 @@ const ContactInfo = () => (
     <div className='space-y-6'>
       <ContactDetail
         title='Address'
-        content='123 Makeup Street, Beauty City, BC 12345'
+        content='Bashundhara, Opposite of Jamuna Future Park, Joar Shahara, Dhaka-1229.'
       />
       <ContactDetail
         title='Contact'
-        content='Phone: (123) 456-7890 Email: makeup@example.com'
+        content='Phone: +880 1533-484921 Email: myshamuna94@gmail.com'
       />
       <ContactDetail
         title='Business Hours'
-        content='Monday - Friday: 9:00 AM - 6:00 PM Saturday: 10:00 AM - 4:00 PM Sunday: Closed'
+        content='Saturday - Friday: 6:00 AM - 6:00 PM'
       />
       <FollowUs />
     </div>
