@@ -2,68 +2,83 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const navItems = [
+  { name: 'Home', path: '/' },
+  { name: 'Portfolio', path: '/portfolio' },
+  { name: 'Certificates', path: '/certificates' },
+  { name: 'Contact', path: '/contact' },
+];
 
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Certificates', path: '/certificates' },
-    { name: 'Contact', path: '/contact' },
-  ];
+const Logo = () => (
+  <Link to='/' className='flex items-center h-full'>
+    <img
+      src='/images/LOGO.png'
+      alt='Logo'
+      className='h-20 w-auto object-contain'
+    />
+  </Link>
+);
+
+const DesktopNav = () => (
+  <div className='hidden md:flex space-x-8'>
+    {navItems.map(({ name, path }) => (
+      <Link
+        key={name}
+        to={path}
+        className='text-gray-700 hover:text-primary font-medium transition-colors duration-300'
+      >
+        {name}
+      </Link>
+    ))}
+  </div>
+);
+
+const MobileNav = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
 
   return (
-    <nav className='flex items-center bg-white shadow-md h-30'>
-      <div className='container mx-auto px-4'>
-        <div className='flex justify-between items-center h-16'>
-          <Link to='/' className='flex justify-between items-center h-16'>
-            <img
-              className='flex justify-between items-center h-25'
-              src='/images/LOGO.png'
-              alt='Logo'
-            />
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className='hidden md:flex space-x-8'>
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className='text-gray-600 hover:text-primary transition-colors duration-300'
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Navigation Button */}
-          <button
-            className='md:hidden text-gray-600'
-            onClick={() => setIsOpen(!isOpen)}
+    <div className='md:hidden bg-white border-t border-gray-200'>
+      <div className='px-4 pt-4 pb-4 space-y-2'>
+        {navItems.map(({ name, path }) => (
+          <Link
+            key={name}
+            to={path}
+            onClick={onClose}
+            className='block px-3 py-2 rounded-md text-gray-700 hover:text-primary font-medium transition-colors duration-200'
           >
-            {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+            {name}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const closeMenu = () => setIsOpen(false);
+
+  return (
+    <nav className='bg-white shadow-md'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+        <div className='flex justify-between items-center h-24'>
+          <Logo />
+
+          <DesktopNav />
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            className='md:hidden text-gray-700 focus:outline-none'
+            onClick={toggleMenu}
+            aria-label='Toggle Menu'
+          >
+            {isOpen ? <HiX size={28} /> : <HiMenu size={28} />}
           </button>
         </div>
-
-        {/* Mobile Navigation Menu */}
-        {isOpen && (
-          <div className='md:hidden'>
-            <div className='px-2 pt-2 pb-3 space-y-1'>
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className='block px-3 py-2 text-gray-600 hover:text-primary transition-colors duration-300'
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
+
+      <MobileNav isOpen={isOpen} onClose={closeMenu} />
     </nav>
   );
 };

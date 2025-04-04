@@ -1,5 +1,73 @@
 import React from 'react';
 
+const CertificateCard = ({ certificate }) => {
+  return (
+    <div className='bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300'>
+      <div className='relative h-48 sm:h-56 md:h-64'>
+        <img
+          src={certificate.image}
+          alt={certificate.title}
+          className='w-full h-full object-cover'
+        />
+      </div>
+      <div className='p-4 sm:p-6'>
+        <h3 className='text-lg sm:text-xl font-semibold mb-2'>
+          {certificate.title}
+        </h3>
+        <p className='text-sm sm:text-base text-gray-600 mb-1'>
+          {certificate.issuer}
+        </p>
+        <p className='text-primary font-medium text-sm sm:text-base mb-2'>
+          {certificate.date}
+        </p>
+        <p className='text-xs sm:text-sm text-gray-600'>
+          {certificate.description}
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const AdditionalQualifications = () => (
+  <div className='mt-12 sm:mt-16'>
+    <h2 className='text-2xl sm:text-3xl font-bold text-center mb-8'>
+      Additional Qualifications
+    </h2>
+    <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8'>
+      <QualificationList
+        title='Professional Experience'
+        items={[
+          '10+ years of professional makeup artistry',
+          'Featured in multiple bridal magazines',
+          'Worked with various celebrities and public figures',
+        ]}
+      />
+      <QualificationList
+        title='Specialized Skills'
+        items={[
+          'Airbrush makeup application',
+          'Special effects makeup',
+          'Fashion and editorial makeup',
+        ]}
+      />
+    </div>
+  </div>
+);
+
+const QualificationList = ({ title, items }) => (
+  <div className='bg-gray-50 p-6 rounded-lg shadow-md'>
+    <h3 className='text-xl sm:text-2xl font-semibold mb-4'>{title}</h3>
+    <ul className='space-y-2 text-sm sm:text-base'>
+      {items.map((item, index) => (
+        <li key={index} className='flex items-center'>
+          <span className='w-2 h-2 bg-primary rounded-full mr-2'></span>
+          {item}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 const Certificates = () => {
   const certificates = [
     {
@@ -54,77 +122,19 @@ const Certificates = () => {
   ];
 
   return (
-    <div className='py-16'>
-      <div className='container'>
-        <h1 className='section-title'>Certificates & Qualifications</h1>
+    <div className='py-8 sm:py-16'>
+      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+        <h1 className='section-title text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-12'>
+          Certificates & Qualifications
+        </h1>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-          {certificates.map((cert) => (
-            <div
-              key={cert.id}
-              className='bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300'
-            >
-              <div className='relative h-48'>
-                <img
-                  src={cert.image}
-                  alt={cert.title}
-                  className='w-full h-full object-cover'
-                />
-              </div>
-              <div className='p-6'>
-                <h3 className='text-xl font-semibold mb-2'>{cert.title}</h3>
-                <p className='text-gray-600 mb-2'>{cert.issuer}</p>
-                <p className='text-primary font-medium mb-2'>{cert.date}</p>
-                <p className='text-gray-600'>{cert.description}</p>
-              </div>
-            </div>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8'>
+          {certificates.map((certificate) => (
+            <CertificateCard key={certificate.id} certificate={certificate} />
           ))}
         </div>
 
-        {/* Additional Qualifications Section */}
-        <div className='mt-16'>
-          <h2 className='text-3xl font-bold text-center mb-8'>
-            Additional Qualifications
-          </h2>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <div className='bg-gray-50 p-6 rounded-lg'>
-              <h3 className='text-xl font-semibold mb-4'>
-                Professional Experience
-              </h3>
-              <ul className='space-y-2'>
-                <li className='flex items-center'>
-                  <span className='w-2 h-2 bg-primary rounded-full mr-2'></span>
-                  10+ years of professional makeup artistry
-                </li>
-                <li className='flex items-center'>
-                  <span className='w-2 h-2 bg-primary rounded-full mr-2'></span>
-                  Featured in multiple bridal magazines
-                </li>
-                <li className='flex items-center'>
-                  <span className='w-2 h-2 bg-primary rounded-full mr-2'></span>
-                  Worked with various celebrities and public figures
-                </li>
-              </ul>
-            </div>
-            <div className='bg-gray-50 p-6 rounded-lg'>
-              <h3 className='text-xl font-semibold mb-4'>Specialized Skills</h3>
-              <ul className='space-y-2'>
-                <li className='flex items-center'>
-                  <span className='w-2 h-2 bg-primary rounded-full mr-2'></span>
-                  Airbrush makeup application
-                </li>
-                <li className='flex items-center'>
-                  <span className='w-2 h-2 bg-primary rounded-full mr-2'></span>
-                  Special effects makeup
-                </li>
-                <li className='flex items-center'>
-                  <span className='w-2 h-2 bg-primary rounded-full mr-2'></span>
-                  Fashion and editorial makeup
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <AdditionalQualifications />
       </div>
     </div>
   );
